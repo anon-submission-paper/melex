@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Variation Transformer Demo</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+         <center>
+          <h1 class="title">Are learning-based approaches robust enough? A new dataset, algorithm, and comparative evaluation for melody extraction in symbolic music</h1>
+          <br/>
+          <font size="5">
+            <a href="#coming soon">
+                <b>[Paper]</b></a>
+            | 
+            <a href="#coming soon">
+                <b>[Code]</b>
+            </a>
+          </font>
+        </center>
+        
+        <div class="instructions">
+          <p>
+            &nbsp &nbsp &nbsp &nbsp Melody is often considered an essential part of music, and melody extraction in symbolic music (MESM) is one of the earliest topics in the field of music information retrieval (MIR). With the development of machine learning and deep learning, most recent MESM approaches are learning-based as opposed to rules-based, raising questions: i)~how differing approaches to MESM compare, and ii)~the robustness of existing solutions. To investigate these issues, we introduce a new dataset that contains 474 measures of 40 fully orchestrated music excerpts in MIDI format, with two professionally annotated melodies per excerpt. We also propose a new rule-based algorithm for MESM named MelodyExtractor (MelEx). The results of a comparative evaluation in the form a listening study show that MelEx outperforms two learning-based approaches (MIDI-BERT and LStoM) for "melody correctness" on our dataset. In terms of robustness, results indicate a significant drop-off in performance of learning-based approaches MIDI-BERT and LStoM when applied to music beyond their training dataset. While the drop-off is not surprising, contributions of this paper include: quantifying the drop-off; underlining the need for re-training existing ML approaches on a greater diversity of data; and proposing a rules-based approach that can be utilized in future comparative evaluations.
+          </p>
+        </div>
+        
+        
+      <br>
+        
+        <!-- Instructions on using this project -->
+        <div class="instructions">
+          <h2>
+            Melody extraction sample
+          </h2>
+          <p>
+            These 10 groups of stimuli were picked randomly from our listen study materials. Each page below shows a piece of fully orchestrated source music and melodies extracted by different approaches. In each melody extraction sample, to make it easier to compare the extracted melody with the source music excerpt, we placed the extracted melody in the right channel and the original music excerpt in the left channel. The piano-roll figure for each melody extraction result is also attached, where the extracted melody is highlighted in red oblongs, while the non-melody part is represented in blue oblongs.
+          </p>
+        </div>
+  <div class="container">
+    <input type="radio" id="page1" name="page" checked>
+    <input type="radio" id="page2" name="page">
+    <input type="radio" id="page3" name="page">
+    <input type="radio" id="page4" name="page">
+    <input type="radio" id="page5" name="page">
+    <input type="radio" id="page6" name="page">
+    <input type="radio" id="page7" name="page">
+    <input type="radio" id="page8" name="page">
+    <input type="radio" id="page9" name="page">
+    <input type="radio" id="page10" name="page">
+
+    <div class="nav">
+      <label for="page1">Page 1</label>
+      <label for="page2">Page 2</label>
+      <label for="page3">Page 3</label>
+      <label for="page1">Page 4</label>
+      <label for="page2">Page 5</label>
+      <label for="page3">Page 6</label>
+      <label for="page1">Page 7</label>
+      <label for="page2">Page 8</label>
+      <label for="page3">Page 9</label>
+      <label for="page1">Page 10</label>
+    </div>
+
+    <div class="page" id="content1">
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px; width: 400px">Source music</th>
+                        <th style="text-align: center;">1st melody annotated by human annotator</th>
+                        <th style="text-align: center;">2nd melody annotated by human annotator</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center; "> 
+                          <img width="400" style="width: 400px; height: 20px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/blank.png" height="140"><br>
+                          "Luigi's Mansion", <i>Mario Kart DS</i> (Nintendo, 2005) <br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/10.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/10_a.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/10_a.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/10_b.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/10_b.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px;">Melody extracted by MelEx</th>
+                        <th style="text-align: center;">Melody extracted by MIDI-BERT</th>
+                        <th style="text-align: center;">Melody extracted by LStoM</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/10_rule.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/10_rule.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/10_midibert.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/10_midibert.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/10_lstom.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/10_lstom.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div class="page" id="content2">
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px; width: 400px">Source music</th>
+                        <th style="text-align: center;">1st melody annotated by human annotator</th>
+                        <th style="text-align: center;">2nd melody annotated by human annotator</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center; "> 
+                          <img width="400" style="width: 400px; height: 20px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/blank.png" height="140"><br>
+                          "Ten years", <i>Eason Chan</i> <br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/34.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/34_a.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/34_a.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/34_b.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/34_b.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px;">Melody extracted by MelEx</th>
+                        <th style="text-align: center;">Melody extracted by MIDI-BERT</th>
+                        <th style="text-align: center;">Melody extracted by LStoM</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/34_rule.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/34_rule.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/34_midibert.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/34_midibert.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/34_lstom.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/34_lstom.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+          <div class="page" id="content3">
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px; width: 400px">Source music</th>
+                        <th style="text-align: center;">1st melody annotated by human annotator</th>
+                        <th style="text-align: center;">2nd melody annotated by human annotator</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center; "> 
+                          <img width="400" style="width: 400px; height: 20px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/blank.png" height="140"><br>
+                          "Vague Hope: Spring Rain", <i>NieR: Automata</i>, (Square Enix, 2017) <br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/02.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/02_a.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/02_a.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/02_b.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/02_b.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px;">Melody extracted by MelEx</th>
+                        <th style="text-align: center;">Melody extracted by MIDI-BERT</th>
+                        <th style="text-align: center;">Melody extracted by LStoM</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/02_rule.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/02_rule.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/02_midibert.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/02_midibert.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/02_lstom.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/02_lstom.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+          
+          <div class="page" id="content4">
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px; width: 400px">Source music</th>
+                        <th style="text-align: center;">1st melody annotated by human annotator</th>
+                        <th style="text-align: center;">2nd melody annotated by human annotator</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center; "> 
+                          <img width="400" style="width: 400px; height: 20px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/blank.png" height="140"><br>
+                          "Ji Mo Sha Zhou Leng", <i>Steve Chou</i><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/35.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/35_a.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/35_a.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/35_b.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/35_b.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px;">Melody extracted by MelEx</th>
+                        <th style="text-align: center;">Melody extracted by MIDI-BERT</th>
+                        <th style="text-align: center;">Melody extracted by LStoM</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/35_rule.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/35_rule.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/35_midibert.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/35_midibert.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/35_lstom.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/35_lstom.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+          
+          <div class="page" id="content5">
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px; width: 400px">Source music</th>
+                        <th style="text-align: center;">1st melody annotated by human annotator</th>
+                        <th style="text-align: center;">2nd melody annotated by human annotator</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center; "> 
+                          <img width="400" style="width: 400px; height: 20px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/blank.png" height="140"><br>
+                          "Dressed For Success", <i>Roxette</i><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/21.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/21_a.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/21_a.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/21_b.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/21_b.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px;">Melody extracted by MelEx</th>
+                        <th style="text-align: center;">Melody extracted by MIDI-BERT</th>
+                        <th style="text-align: center;">Melody extracted by LStoM</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/21_rule.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/21_rule.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/21_midibert.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/21_midibert.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/21_lstom.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/21_lstom.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+          
+          <div class="page" id="content6">
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px; width: 400px">Source music</th>
+                        <th style="text-align: center;">1st melody annotated by human annotator</th>
+                        <th style="text-align: center;">2nd melody annotated by human annotator</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center; "> 
+                          <img width="400" style="width: 400px; height: 20px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/blank.png" height="140"><br>
+                          "Homura", <i>Lisa</i><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/19.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/19_a.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/19_a.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/19_b.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/19_b.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px;">Melody extracted by MelEx</th>
+                        <th style="text-align: center;">Melody extracted by MIDI-BERT</th>
+                        <th style="text-align: center;">Melody extracted by LStoM</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/19_rule.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/19_rule.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/19_midibert.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/19_midibert.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/19_lstom.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/19_lstom.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+          
+          <div class="page" id="content7">
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px; width: 400px">Source music</th>
+                        <th style="text-align: center;">1st melody annotated by human annotator</th>
+                        <th style="text-align: center;">2nd melody annotated by human annotator</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center; "> 
+                          <img width="400" style="width: 400px; height: 20px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/blank.png" height="140"><br>
+                          "Costa del Sol", <i>Final Fantasy VII</i>, (Square, 1997)<br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/04.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/04_a.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/04_a.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/04_b.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/04_b.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px;">Melody extracted by MelEx</th>
+                        <th style="text-align: center;">Melody extracted by MIDI-BERT</th>
+                        <th style="text-align: center;">Melody extracted by LStoM</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/04_rule.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/04_rule.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/04_midibert.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/04_midibert.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/04_lstom.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/04_lstom.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+          
+          <div class="page" id="content8">
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px; width: 400px">Source music</th>
+                        <th style="text-align: center;">1st melody annotated by human annotator</th>
+                        <th style="text-align: center;">2nd melody annotated by human annotator</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center; "> 
+                          <img width="400" style="width: 400px; height: 20px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/blank.png" height="140"><br>
+                          "Early Bird", <i>Andre Brasseur</i><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/23.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/23_a.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/23_a.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/23_b.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/23_b.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px;">Melody extracted by MelEx</th>
+                        <th style="text-align: center;">Melody extracted by MIDI-BERT</th>
+                        <th style="text-align: center;">Melody extracted by LStoM</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/23_rule.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/23_rule.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/23_midibert.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/23_midibert.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/23_lstom.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/23_lstom.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+          
+          <div class="page" id="content9">
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px; width: 400px">Source music</th>
+                        <th style="text-align: center;">1st melody annotated by human annotator</th>
+                        <th style="text-align: center;">2nd melody annotated by human annotator</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center; "> 
+                          <img width="400" style="width: 400px; height: 20px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/blank.png" height="140"><br>
+                          "Love Without Breaking Up", <i>Silence Wang</i><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/31.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/31_a.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/31_a.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/31_b.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/31_b.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px;">Melody extracted by MelEx</th>
+                        <th style="text-align: center;">Melody extracted by MIDI-BERT</th>
+                        <th style="text-align: center;">Melody extracted by LStoM</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/31_rule.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/31_rule.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/31_midibert.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/31_midibert.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/31_lstom.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/31_lstom.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+          
+          <div class="page" id="content10">
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px; width: 400px">Source music</th>
+                        <th style="text-align: center;">1st melody annotated by human annotator</th>
+                        <th style="text-align: center;">2nd melody annotated by human annotator</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center; "> 
+                          <img width="400" style="width: 400px; height: 20px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/blank.png" height="140"><br>
+                          "Vaniville Town Music", <i>Pokémon X and Y</i>, (Nintendo, 2013)<br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/17.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/17_a.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/17_a.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/17_b.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/17_b.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+              <table>
+                  <thead>
+                      <tr style="background-color: #333; color: #fff;">
+                        <th style="text-align: center; height: 40px;">Melody extracted by MelEx</th>
+                        <th style="text-align: center;">Melody extracted by MIDI-BERT</th>
+                        <th style="text-align: center;">Melody extracted by LStoM</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/17_rule.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/17_rule.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/17_midibert.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/17_midibert.mp3"></audio>
+                        </td>
+                        <td style="text-align: center;"> 
+                          <img width="400" style="width: 400px; height: 270px;" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/17_lstom.png" height="140"><br>
+                          <audio width="400" preload="auto" height="40" controls="true" class="qmedia"><source type="audio/mp3" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/audio/17_lstom.mp3"></audio>
+                        </td>
+                    </tr>
+                  </tbody>
+              </table>
+          </div>
+  </div>
+
+            <div class="instructions">
+          <h2>
+            Rating distributions by datasets
+          </h2>
+          <p>
+            Violin plots for rating (1–7) distributions of 11 dimensions introduced in Section 5.2.3 on the whole dataset. The envelope represents the distribution of responses; the lines indicate rating scales; the horizontal line goes from the lower quartile through the median to the upper quartile. We observed that there is a significant drop-off in ratings for melody <i>correctness</i> of learning-based approaches (MIDI-BERT and LStoM) when applied to music beyond their training dataset. We also observed that an approach that receives higher ratings for melody <i>correctness</i> tends to receive higher ratings for perception characters, as well as <i>is human</i>, and <i>willingness</i> to use such a melody extraction system. 
+          </p>
+          <center>
+          
+            <img width="1200" style="width: 940px;height:400px" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/violin_plot_byDataset.png" height="140">
+          </center>
+       </div>
+        
+        <div class="instructions">
+          <h2>
+            Rating distributions by annotators
+          </h2>
+          <p>
+            Violin plots for rating (1–7) distributions of 11 dimensions introduced in Section 5.2.3 on the whole dataset, where "a1 - a8" represent melodies annotated by 8 professional annotators separately. The envelope represents the distribution of responses; the lines indicate rating scales; the horizontal line goes from the lower quartile through the median to the upper quartile. We observed that there is a relatively high level of objectivity in terms of how listeners rate the melody <i>correctness</i> of human-annotated melody extraction, and the distribution of melody <i>correctness</i> ratings is broadly consistent across eight annotators, but melodies annotated by annotator "a7" receive a lower rating for "easy to remember" (<i>remember</i>) than that from other annotators.
+          </p>
+          <center>
+          
+            <img width="1200" style="width: 940px;height:400px" src="https://tomcollinsresearch.net/participantStudies/var24/melody_listen/fig/violin_plot_byAnnotator.png" height="140">
+          </center>
+       </div>
+          
+
+      </div>
+    </div>
+
+    <hr>
+    <!-- The footer holds our remix button — you can use it for structure or cut it out ✂ -->
+    <footer class="footer">  
+        
+        This is the demo page for the paper "Are learning-based approaches robust enough? A new dataset, algorithm, and comparative evaluation for melody extraction in symbolic music", which has been submitted to JNMR.  
+    </footer>
+</body>
+</html>
